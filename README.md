@@ -53,7 +53,7 @@ deactivate Network
 
 
     ![Диаграмма классов](https://github.com/user-attachments/assets/f7bc8521-8a23-4e43-b7ae-8738d4182ef7)
-  	________________________________________
+  	
 Классы
 Внутри пакета описаны четыре класса:
 •	Network
