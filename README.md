@@ -52,54 +52,5 @@ deactivate Network
 
 
 
-    ![Диаграмма классов](https://github.com/user-attachments/assets/f7bc8521-8a23-4e43-b7ae-8738d4182ef7)
-  	
-Классы
-Внутри пакета описаны четыре класса:
-•	Network
-Это главный класс, который:
-o	Имеет поля (- означает private):
-	Logger logger — логирование.
-	NotifyIcon netAct — иконка в трее.
-	Icon netTx, netRx, netTxRx, netIdle — разные иконки активности сети.
-	Thread netActMonWorker — рабочий поток для мониторинга сети.
-o	И имеет методы (+ означает public):
-	Network() — конструктор.
-	ShowMainForm() — показать главное окно.
-	LogTcpConnection() — логирование TCP-соединений.
-	BlockSelectedIp(), UnblockSelectedIp() — управление блокировкой IP.
-________________________________________
-•	Database
-Статический класс, который:
-o	LogVisit(string domain, string processName, string ip) — логирует сетевое соединение.
-o	GetNetworkHistory() — возвращает историю соединений в виде таблицы.
-________________________________________
-•	FirewallRuleManager (отмечен как <<utility>>)
-Утилитный класс:
-o	RunNetshCommand(string arguments) — запускает команды для настройки файрвола (netsh).
-________________________________________
-•	TcpTableProvider (тоже <<utility>>)
-Утилитный класс для работы с TCP:
-o	GetExtendedTcpTable(...) — получить список TCP-соединений.
-o	GetDomainFromIp(string ip) — получить домен по IP.
-o	IsPrivateIP(IPAddress ip) — проверить, является ли IP приватным.
-________________________________________
- Связи между классами
-•	Network --> Database : uses
-Network использует Database для записи сетевой активности.
-•	Network --> FirewallRuleManager : manages rules
-Network управляет правилами файрвола через FirewallRuleManager.
-•	Network --> TcpTableProvider : retrieves TCP info
-Network запрашивает информацию о TCP через TcpTableProvider.
-________________________________________
-Как читать всю диаграмму?
-1.	Network — главный актор. Он координирует всю работу.
-2.	Для выполнения задач:
-	Он получает TCP-таблицу через TcpTableProvider.  
-	Он пишет логи в базу данных через Database.  
-	Он добавляет или удаляет правила файрвола через FirewallRuleManager.  
-3.	FirewallRuleManager и TcpTableProvider — утилитные (вспомогательные) классы, у них нет состояния (состояние не хранится между вызовами).
-
-
 
 
